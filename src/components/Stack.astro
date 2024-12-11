@@ -1,0 +1,230 @@
+---
+import astroIcon from "@assets/svg/astro.svg?raw";
+import awsIcon from "@assets/svg/aws.svg?raw";
+import dockerIcon from "@assets/svg/docker.svg?raw";
+import javascriptIcon from "@assets/svg/javascript.svg?raw";
+import mongoIcon from "@assets/svg/mongodb.svg?raw";
+import mysqlIcon from "@assets/svg/mysql.svg?raw";
+import nextjsIcon from "@assets/svg/nextjs.svg?raw";
+import nodejsIcon from "@assets/svg/nodejs.svg?raw";
+import pythonIcon from "@assets/svg/python.svg?raw";
+import reactIcon from "@assets/svg/react.svg?raw";
+import cicdIcon from "@assets/svg/rocket.svg?raw";
+import sqlServerIcon from "@assets/svg/sql.svg?raw";
+import typescriptIcon from "@assets/svg/typescript.svg?raw";
+import viteIcon from "@assets/svg/vite.svg?raw";
+import vueIcon from "@assets/svg/vue.svg?raw";
+import Title from "@components/Title.astro";
+
+type Stack = {
+  name: string;
+  category: string;
+  icon: string;
+};
+
+const stack: Stack[] = [
+  {
+    name: "Typescript",
+    category: "Programming language",
+    icon: typescriptIcon,
+  },
+  {
+    name: "Javascript",
+    category: "Programming language",
+    icon: javascriptIcon,
+  },
+  {
+    name: "Python",
+    category: "Programming language",
+    icon: pythonIcon,
+  },
+  {
+    name: "Node.js",
+    category: "Backend",
+    icon: nodejsIcon,
+  },
+  {
+    name: "React",
+    category: "Frontend",
+    icon: reactIcon,
+  },
+  {
+    name: "Vue",
+    category: "Frontend",
+    icon: vueIcon,
+  },
+  {
+    name: "Astro",
+    category: "Frontend",
+    icon: astroIcon,
+  },
+  {
+    name: "Next.js",
+    category: "Frontend",
+    icon: nextjsIcon,
+  },
+  {
+    name: "Vite",
+    category: "Frontend",
+    icon: viteIcon,
+  },
+  {
+    name: "Express",
+    category: "Backend",
+    icon: nodejsIcon,
+  },
+  {
+    name: "Koa",
+    category: "Backend",
+    icon: nodejsIcon,
+  },
+  {
+    name: "GraphQL",
+    category: "Backend",
+    icon: nodejsIcon,
+  },
+  {
+    name: "Docker",
+    category: "DevOps",
+    icon: dockerIcon,
+  },
+  {
+    name: "AWS",
+    category: "DevOps",
+    icon: awsIcon,
+  },
+  {
+    name: "CI/CD",
+    category: "DevOps",
+    icon: cicdIcon,
+  },
+  {
+    name: "MongoDB",
+    category: "Database",
+    icon: mongoIcon,
+  },
+  {
+    name: "MySQL",
+    category: "Database",
+    icon: mysqlIcon,
+  },
+  {
+    name: "SQL Server",
+    category: "Database",
+    icon: sqlServerIcon,
+  },
+];
+
+const shuffleArray = (array: Stack[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
+const newStack = shuffleArray(stack);
+---
+
+<section id="stack">
+  <Title textAlign="right">Stack</Title>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      {
+        newStack.map(({ name, icon, category }) => (
+          <article class="carousel-item">
+            <Fragment set:html={icon} />
+            <span class="name">{name}</span>
+            <span class="category">{category}</span>
+          </article>
+        ))
+      }
+    </div>
+    <div class="carousel-track" aria-hidden="true">
+      {
+        newStack.map(({ name, icon, category }) => (
+          <article class="carousel-item">
+            <Fragment set:html={icon} />
+            <span class="name">{name}</span>
+            <span class="category">{category}</span>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style
+  define:vars={{
+    itemWidth: "200px",
+    itemGap: "15px",
+    totalItems: newStack.length,
+  }}
+>
+  section {
+    margin: 80px 0;
+    overflow: hidden;
+  }
+
+  .carousel-container {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 50px,
+      black calc(100% - 50px),
+      transparent 100%
+    );
+    display: flex;
+    gap: var(--itemGap);
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel-track {
+    display: flex;
+    gap: var(--itemGap);
+    animation: scroll 50s linear infinite;
+  }
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  .carousel-item {
+    min-width: var(--itemWidth);
+    width: var(--itemWidth);
+    display: grid;
+    grid-template-areas:
+      "icon name"
+      ". category";
+    grid-template-columns: 30px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: var(--section-color);
+    padding: 15px;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .name {
+    grid-area: name;
+  }
+
+  .category {
+    border-radius: 10px;
+    padding: 5px;
+    background-color: var(--secondary-color);
+    font-size: 10px;
+    width: fit-content;
+    grid-area: category;
+    margin-left: auto;
+    text-wrap: nowrap;
+  }
+</style>
