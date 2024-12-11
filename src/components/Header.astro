@@ -1,0 +1,128 @@
+---
+import lightLogo from "@assets/img/logo.png";
+
+const paths = [
+  { path: "#about-me", label: "About me" },
+  { path: "#stack", label: "Stack" },
+  { path: "#experience", label: "Experience" },
+];
+---
+
+<header>
+  <img src={lightLogo.src} alt="logo" width="50px" />
+  <nav>
+    {
+      paths.map(({ path, label }) => (
+        <a id={path} href={path} data-path={path}>
+          {label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("nav a");
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px 0px -20% 0px",
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const visibleSections = entries.filter((entry) => entry.isIntersecting);
+
+      if (visibleSections.length > 0) {
+        const activeSection = visibleSections.reduce<{
+          entry: IntersectionObserverEntry;
+          distanceFromCenter: number;
+        } | null>((mostCentered, entry) => {
+          const rect = entry.target.getBoundingClientRect();
+          const distanceFromCenter = Math.abs(
+            rect.top + rect.height / 2 - window.innerHeight / 2
+          );
+
+          return !mostCentered ||
+            distanceFromCenter < mostCentered.distanceFromCenter
+            ? { entry, distanceFromCenter }
+            : mostCentered;
+        }, null)?.entry;
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+        });
+
+        if (activeSection?.target.id) {
+          const activeLink = document.querySelector(
+            `a[data-path="#${activeSection.target.id}"]`
+          );
+          if (activeLink) {
+            activeLink.classList.add("active");
+            history.replaceState(null, "", `#${activeSection.target.id}`);
+          }
+        } else {
+          history.replaceState(null, "", window.location.pathname);
+        }
+      } else {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+        });
+        history.replaceState(null, "", window.location.pathname);
+      }
+    }, observerOptions);
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    const hash = window.location.hash;
+    if (hash) {
+      const targetElement = document.querySelector(hash);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+</script>
+
+<style>
+  header {
+    padding: 20px 0;
+    z-index: 999;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    position: fixed;
+    width: 100%;
+    background-color: var(--body-bg);
+
+    @media (max-width: 600px) {
+      padding: 10px 0;
+    }
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a {
+    font-size: 13px;
+    padding: 5px;
+    margin: 0 10px;
+    border-bottom: 2px solid transparent;
+
+    text-decoration: none;
+    color: var(--text-color);
+    &:hover {
+      border-bottom: 2px solid var(--primary-color);
+    }
+  }
+
+  .active {
+    border-bottom: 2px solid var(--primary-color);
+  }
+</style>
