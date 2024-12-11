@@ -1,0 +1,92 @@
+---
+import githubIcon from "@assets/svg/github.svg?raw";
+import linkedinIcon from "@assets/svg/linkedin.svg?raw";
+---
+
+<section id="social">
+  <div class="separator">
+    <div>
+      <svg
+        class="svg-separator sep3"
+        viewBox="0 0 1600 100"
+        style="display: block;"
+        data-height="100"
+      >
+        <path
+          style="opacity: 1;fill: var(--primary-color);"
+          d="M-40,71.627C20.307,71.627,20.058,32,80,32s60.003,40,120,40s59.948-40,120-40s60.313,40,120,40s60.258-40,120-40s60.202,40,120,40s60.147-40,120-40s60.513,40,120,40s60.036-40,120-40c59.964,0,60.402,40,120,40s59.925-40,120-40s60.291,40,120,40s60.235-40,120-40s60.18,40,120,40s59.82,0,59.82,0l0.18,26H-60V72L-40,71.627z"
+        ></path>
+        <path
+          style="opacity: 1;fill: var(--secondary-color);"
+          d="M-40,83.627C20.307,83.627,20.058,44,80,44s60.003,40,120,40s59.948-40,120-40s60.313,40,120,40s60.258-40,120-40s60.202,40,120,40s60.147-40,120-40s60.513,40,120,40s60.036-40,120-40c59.964,0,60.402,40,120,40s59.925-40,120-40s60.291,40,120,40s60.235-40,120-40s60.18,40,120,40s59.82,0,59.82,0l0.18,14H-60V84L-40,83.627z"
+        ></path>
+        <path
+          style="fill: var(--section-color);"
+          d="M-40,95.627C20.307,95.627,20.058,56,80,56s60.003,40,120,40s59.948-40,120-40s60.313,40,120,40s60.258-40,120-40s60.202,40,120,40s60.147-40,120-40s60.513,40,120,40s60.036-40,120-40c59.964,0,60.402,40,120,40s59.925-40,120-40s60.291,40,120,40s60.235-40,120-40s60.18,40,120,40s59.82,0,59.82,0l0.18,138H-60V96L-40,95.627z"
+        ></path></svg
+      >
+    </div>
+    <div class="container-btns">
+      <a href="https://www.linkedin.com/in/yaremi-astorga/" target="_blank">
+        <Fragment set:html={linkedinIcon} />
+      </a>
+      <a href="https://github.com/Yaremi18" target="_blank">
+        <Fragment set:html={githubIcon} />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    justify-content: center;
+    margin: 70px 0;
+    gap: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .separator {
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    background-color: var(--section-color);
+  }
+
+  .sep3 {
+    transform: translateY(-100%) translateY(2px) scale(1, 1);
+    transform-origin: top;
+  }
+
+  .svg-separator {
+    stroke: none;
+    display: block;
+    background: 0 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9;
+    -webkit-transform: translateY(-100%) translateY(2px);
+    transform: translateY(-100%) translateY(2px);
+    width: 100%;
+  }
+  .svg-separator.bottom {
+    top: auto;
+    bottom: 0;
+  }
+</style>
