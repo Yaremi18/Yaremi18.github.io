@@ -1,0 +1,20 @@
+---
+interface Props {
+  fontSize?: string;
+  textAlign?: "left" | "center" | "right";
+}
+
+const { fontSize = "40px", textAlign = "left" } = Astro.props;
+---
+
+<h2><slot /></h2>
+
+<style define:vars={{ fontSize, textAlign }}>
+  h2 {
+    font-family: PlaywriteGBS;
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-size: var(--fontSize);
+    text-align: var(--textAlign);
+  }
+</style>
