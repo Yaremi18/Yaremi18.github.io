@@ -1,0 +1,114 @@
+---
+import Card from "@components/Card.astro";
+import Briefcase from "@components/icons/Briefcase.astro";
+import School from "@components/icons/School.astro";
+import Title from "@components/Title.astro";
+---
+
+<section id="about-me">
+  <Card>
+    <Title>About me</Title>
+    <div class="content">
+      <p class="description">
+        As a software engineer, I have demonstrated the ability to solve
+        problems efficiently, even when working with unfamiliar technologies.
+        Striving for continuous improvement, I prioritize applying development
+        solutions using best practices.
+        <br />
+        <br />
+        Versatility is one of my strengths. I am passionate about web and mobile
+        development and curious to explore programming languages, databases, DevOps,
+        frontend technologies, or anything that can help me improve my work and grow
+        professionally.
+        <br />
+        <br />
+        I consider myself a responsible and friendly person who enjoys reinforcing
+        my knowledge and sharing insights with others.
+      </p>
+      <div class="education">
+        <School />
+        <p>
+          <span class="title">COMPUTER SYSTEM ENGINEER</span>
+          <br />
+          <span class="title"
+            >Web development and multi platforms specialty</span
+          >
+          <br />
+          <span> Instituto Tecnológico de Tepic </span>
+          <br />
+          <span>2013-2018</span>
+        </p>
+      </div>
+      <div class="experience">
+        <Briefcase />
+        <p>
+          <span class="years-of-experience">7+</span>
+          <br />
+          <span class="years-of-experience-label">YEARS OF EXPERIENCE</span>
+        </p>
+      </div>
+    </div>
+  </Card>
+</section>
+
+<style>
+  .content {
+    display: grid;
+    grid-template-areas:
+      "description education"
+      "description experience";
+    grid-template-columns: repeat(auto-fill, 1fr);
+    column-gap: 40px;
+
+    @media (max-width: 800px) {
+      grid-template-areas:
+        "description description"
+        "education experience";
+    }
+
+    @media (max-width: 600px) {
+      grid-template-areas:
+        "description"
+        "education"
+        "experience";
+    }
+  }
+
+  .description {
+    grid-area: description;
+    font-size: 14px;
+  }
+
+  .education {
+    grid-area: education;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+      line-height: 25px;
+    }
+
+    .title {
+      font-family: PlaywriteGBS;
+      font-size: 14px;
+    }
+  }
+
+  .experience {
+    grid-area: experience;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .years-of-experience {
+      font-size: 34px;
+      font-family: PlaywriteGBS;
+    }
+
+    .years-of-experience-label {
+      font-size: 14px;
+      font-family: PlaywriteGBS;
+    }
+  }
+</style>
