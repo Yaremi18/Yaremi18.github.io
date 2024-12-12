@@ -34,6 +34,12 @@ import linkedinIcon from "@assets/svg/linkedin.svg?raw";
         <Fragment set:html={githubIcon} />
       </a>
     </div>
+    <span class="avatar-by">
+      Avatar by
+      <a href="https://www.instagram.com/lupitastorga.dc/" target="_blank">
+        @lupitastorga.dc
+      </a>
+    </span>
   </div>
 </section>
 
@@ -88,5 +94,14 @@ import linkedinIcon from "@assets/svg/linkedin.svg?raw";
   .svg-separator.bottom {
     top: auto;
     bottom: 0;
+  }
+
+  .avatar-by {
+    margin-top: 20px;
+    font-size: 9px;
+
+    a {
+      color: var(--secondary-color);
+    }
   }
 </style>
