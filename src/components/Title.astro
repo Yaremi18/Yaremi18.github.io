@@ -7,7 +7,7 @@ interface Props {
 const { fontSize = "40px", textAlign = "left" } = Astro.props;
 ---
 
-<h2><slot /></h2>
+<h2>{`<`}<slot />{` />`}</h2>
 
 <style define:vars={{ fontSize, textAlign }}>
   h2 {
