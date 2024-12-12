@@ -1,0 +1,147 @@
+---
+import chartDotsIcon from "@assets/svg/chart-dots.svg?raw";
+import clockBoltIcon from "@assets/svg/clock-bolt.svg?raw";
+import cloudOffIcon from "@assets/svg/cloud-off.svg?raw";
+import keyIcon from "@assets/svg/key.svg?raw";
+import mapPinIcon from "@assets/svg/map-pin.svg?raw";
+import networkIcon from "@assets/svg/network.svg?raw";
+import rocketIcon from "@assets/svg/rocket.svg?raw";
+import statusChangeIcon from "@assets/svg/status-change.svg?raw";
+import Title from "@components/Title.astro";
+
+const experience = [
+  {
+    feature: "REST",
+    description:
+      "Development of RESTful APIs for efficient data retrieval and manipulation, ensuring scalable and maintainable application architecture.",
+    icon: networkIcon,
+  },
+  {
+    feature: "Auth",
+    description:
+      "Authentication and authorization systems, including user registration, login, and role-based access control to secure applications.",
+    icon: keyIcon,
+  },
+  {
+    feature: "Data viz",
+    description:
+      "Creation of dashboards for data visualization, incorporating charts, maps, and various visualization tools, primarily using data from social media and analytics.",
+    tools: ["D3.js", "Observable.js", "AntV"],
+    icon: chartDotsIcon,
+  },
+  {
+    feature: "Maps",
+    description:
+      "Development of features such as georeferencing, enabling and disabling layers using GeoJSONs, adding markers, integrating vector tile sources, creating clusters, and implementing route path animations.",
+    tools: ["Mapbox", "OpenStreetMap"],
+    icon: mapPinIcon,
+  },
+  {
+    feature: "WebSockets",
+    description:
+      "Implementation of features such as real-time route updates in map-based applications and updating form information to enhance the user experience.",
+    tools: ["Socket.IO"],
+    icon: clockBoltIcon,
+  },
+  {
+    feature: "Deployments",
+    description:
+      "Application deployments using CI/CD pipelines, ensuring smooth updates and minimal downtime across development, staging, and production environments.",
+    icon: rocketIcon,
+  },
+  {
+    feature: "Offline",
+    description:
+      "Implementation of offline capabilities to enhance application reliability, including caching data with service workers and providing seamless user experiences during network outages.",
+    icon: cloudOffIcon,
+  },
+  {
+    feature: "App State",
+    description:
+      "Management of application state using modern state management libraries and patterns to ensure predictable and efficient state transitions across components.",
+    tools: ["Redux", "Zustand", "MobX"],
+    icon: statusChangeIcon,
+  },
+];
+---
+
+<section id="experience">
+  <Title>Experience</Title>
+  <div class="experience-container">
+    {
+      experience.map(({ feature, description, icon }) => (
+        <div class="experience-card">
+          <Fragment set:html={icon} />
+          <h3>{feature}</h3>
+          <p>{description}</p>
+        </div>
+      ))
+    }
+    <div class="dots-container">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+  }
+
+  .experience-card {
+    background-color: var(--section-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+
+    h3 {
+      font-family: PlaywriteGBS;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .dots-container {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+  }
+
+  .dot {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
+
+    animation: wave 2s ease-in-out 4;
+    transform-origin: center;
+  }
+
+  .dot:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .dot:nth-child(3) {
+    animation-delay: 0.7s;
+  }
+
+  @keyframes wave {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
