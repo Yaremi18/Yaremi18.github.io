@@ -14,7 +14,7 @@ const paths = [
   <nav>
     {
       paths.map(({ path, label }) => (
-        <a id={path} href={path} data-path={path}>
+        <a id={path} href={path}>
           {label}
         </a>
       ))
@@ -25,61 +25,6 @@ const paths = [
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a");
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px 0px -20% 0px",
-      threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      const visibleSections = entries.filter((entry) => entry.isIntersecting);
-
-      if (visibleSections.length > 0) {
-        const activeSection = visibleSections.reduce<{
-          entry: IntersectionObserverEntry;
-          distanceFromCenter: number;
-        } | null>((mostCentered, entry) => {
-          const rect = entry.target.getBoundingClientRect();
-          const distanceFromCenter = Math.abs(
-            rect.top + rect.height / 2 - window.innerHeight / 2
-          );
-
-          return !mostCentered ||
-            distanceFromCenter < mostCentered.distanceFromCenter
-            ? { entry, distanceFromCenter }
-            : mostCentered;
-        }, null)?.entry;
-
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-        });
-
-        if (activeSection?.target.id) {
-          const activeLink = document.querySelector(
-            `a[data-path="#${activeSection.target.id}"]`
-          );
-          if (activeLink) {
-            activeLink.classList.add("active");
-            history.replaceState(null, "", `#${activeSection.target.id}`);
-          }
-        } else {
-          history.replaceState(null, "", window.location.pathname);
-        }
-      } else {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-        });
-        history.replaceState(null, "", window.location.pathname);
-      }
-    }, observerOptions);
-
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
-
     const hash = window.location.hash;
     if (hash) {
       const targetElement = document.querySelector(hash);
@@ -120,6 +65,7 @@ const paths = [
     border-bottom: 2px solid transparent;
 
     text-decoration: none;
+    text-align: center;
     color: var(--text-color);
     &:hover {
       border-bottom: 2px solid var(--primary-color);

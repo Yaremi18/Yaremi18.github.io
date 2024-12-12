@@ -51,6 +51,10 @@ const { title } = Astro.props;
     background: var(--body-bg);
   }
 
+  section {
+    scroll-margin-top: 50px; /* Matches the height of your fixed header */
+  }
+
   html.dark {
     --body-bg: #212529;
     --text-color: var(--white-color);
