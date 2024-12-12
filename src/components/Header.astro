@@ -1,5 +1,6 @@
 ---
 import logo from "@assets/img/logo.png";
+import ChangeTheme from "@components/ChangeTheme.astro";
 
 const paths = [
   { path: "#about-me", label: "About me" },
@@ -19,6 +20,7 @@ const paths = [
       ))
     }
   </nav>
+  <ChangeTheme />
 </header>
 
 <script>
@@ -90,16 +92,18 @@ const paths = [
 
 <style>
   header {
-    padding: 20px 0;
+    padding: 20px 40px;
     z-index: 999;
-    display: grid;
-    grid-template-columns: 80px 1fr;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
-    width: 100%;
+    left: 0;
+    right: 0;
     background-color: var(--body-bg);
 
     @media (max-width: 600px) {
-      padding: 10px 0;
+      padding: 10px 20px;
     }
   }
 
